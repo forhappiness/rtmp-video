@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!--<link href="https://vjs.zencdn.net/7.5.5/video-js.css" rel="stylesheet">-->
+    <!--<script src='https://vjs.zencdn.net/7.5.5/video.js'></script>-->
+    <!--<script src="https://cdn.jsdelivr.net/npm/videojs-flash@2/dist/videojs-flash.min.js"> </script>-->
+
+
+    <!--<link href="https://cdn.bootcss.com/video.js/6.10.3/alt/video-js-cdn.min.css" rel="stylesheet">-->
+    <!--<script src="https://cdn.bootcss.com/video.js/6.10.3/alt/video.novtt.min.js"></script>-->
+    <!--<script src="js/videojs-http-streaming.js"></script>-->
+
+
+    <link rel="stylesheet" href="video-js@7.5.5.css">
+    <script src="js/video@7.5.5.js"></script>
+    <script src="js/videojs-flash.min.js"></script>
+
+    <script src="js/jquery-1.12.0.min.js"></script>
+    <style>
+        .video-js{
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+    <script>
+
+    </script>
+
+</head>
+<body>
+    <!--rtmp播放-->
+    <video id='myvideo' width=960 height=540 class="video-js vjs-default-skin" controls>
+        <!-- RTMP直播源地址-->
+        <source src="">
+    </video>
+    <script>
+
+        $(function () {
+            $('.video-js').css({'width':$(window).width(),'height':$(window).height()})
+
+            // 获取URL传参进来的全景视频的名字
+            function getUrlParam(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+                var r = window.location.search.substr(1).match(reg); //匹配目标参数
+                if (r != null) return unescape(r[2]); return null; //返回参数值
+            }
+            var name = getUrlParam('name');
+
+            if(name=='C2'){
+                $('#myvideo source').attr('src','rtmp://admin:HZJD2019@172.23.108.66:60557/h264/ch1/main/av_stream')
+            }else if(name=='B6'){
+                $('#myvideo source').attr('src','rtmp://admin:HZJD2019@172.23.108.66:60558/h264/ch1/main/av_stream')
+            }else if(name=='A2'){
+                $('#myvideo source').attr('src','rtmp://admin:HZJD2019@172.23.108.66:60559/h264/ch1/main/av_stream')
+            }else if(name=='B7'){
+                $('#myvideo source').attr('src','rtmp://admin:HZJD2019@172.23.108.66:60554/h264/ch1/main/av_stream')
+            }else if(name=='C7l'){
+                $('#myvideo source').attr('src','rtmp://admin:HZJD2019@172.23.108.66:60556/h264/ch1/main/av_stream')
+            }else if(name=='c7r'){
+                $('#myvideo source').attr('src','rtmp://admin:HZJD2019@172.23.108.66:60555/h264/ch1/main/av_stream')
+            }else{
+                $('#myvideo source').attr('src','rtmp://live.hkstv.hk.lxdns.com/live/hks1');
+            }
+
+            var player = videojs('myvideo', {}, function(){
+                console.log('videojs播放器初始化成功');
+                this.play();
+            })
+            // player.play();
+        })
+
+
+    </script>
+
+<!--http播放-->
+    <!--<video id='myvideo' width=960 height=540 class="video-js vjs-default-skin" controls>-->
+        <!--&lt;!&ndash; hls直播源地址：CCTV1高清 &ndash;&gt;-->
+        <!--<source src="http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8">-->
+    <!--</video>-->
+    <!--<script>-->
+        <!--var player = videojs('myvideo', {}, function(){console.log('videojs播放器初始化成功')})-->
+        <!--player.play();-->
+    <!--</script>-->
+</body>
+</html>
